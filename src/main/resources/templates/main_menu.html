@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>MAIN MENU</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script type="text/javascript" src="./js/jquery-3.2.1.min.js"
+	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<link rel="stylesheet" href="./css/bootstrap.css"
+    th:src="@{/css/bootstrap.css}" type="text/css"></link>
+<!-- Required Javascript -->
+<script src="./js/bootstrap.js"></script>
+<script src="./js/bootstrap-treeview.js"></script>
+<script src="./js/filesaver.js"></script>
+<script src="./js/json2csv.js"></script>
+<script src="./js/papaparse.js"></script>
+<script src="./js/perfectload.js"></script>
+</head>
+
+<body style="margin: 0;">
+	<div class="container-fluid" th:replace="common :: header('MAIN MENU')"></div>
+	<div class="container">
+		<div class="row">
+			<h2>Import/Export</h2>
+			<div class="col-sm-6">
+			    <form enctype="multipart/form-data" method="post" id="form_import"> 
+					<input type="file" name="file" class="btn btn-default" id="file_input"
+						style="display: inline">
+					<button type="button" class="btn btn-success"
+                    id="btn-import" style="display: inline; margin-left: 10px;">Import</button>
+				</form>
+				<!-- 
+				<input type="file" name="file" class="btn btn-default"
+                    id="file" style="display: inline">
+                <button type="button" class="btn btn-success"
+                    id="btn-import" style="display: inline; margin-left: 10px;">Import</button> -->
+				<button type="button" class="btn btn-primary"
+					id="btn-export" style="margin-top: 10px;">Export</button>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<hr>
+			<h2>Main Ticket</h2>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<input type="input" class="form-control" id="input-main-ticket"
+						placeholder="Input Main Ticket ID">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<h2>Components</h2>
+			<div class="col-sm-4">
+			<!-- 
+				<h2>Input</h2>
+				<div class="form-group">
+					<label for="input-check-node" class="sr-only">Search Tree:</label>
+					<input type="input" class="form-control" id="input-check-node"
+						placeholder="Identify node...">
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<button type="button" class="btn btn-success check-node"
+							id="btn-check-node">Check Node</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-danger check-node"
+						id="btn-uncheck-node">Uncheck Node</button>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-primary check-node"
+						id="btn-toggle-checked">Toggle Node</button>
+				</div>
+				<hr>
+				 -->
+				<div class="form-group row">
+					<div class="col-sm-6">
+						<button type="button" class="btn btn-success" id="btn-check-all">Check
+							All</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-danger" id="btn-uncheck-all">Uncheck
+						All</button>
+				</div>
+				<hr>
+				<div class="form-group">
+					<button type="button"
+						class="btn btn-lg btn-primary" id="btn-process">Process</button>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div id="treeview-checkable" class="treeview"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="myModalClose" type="button" class="close" data-dismiss="modal" aria-hidden="true" hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Processing</h4>
+                </div>
+                <div class="modal-body" id="myModalBody">
+                    <button id="myModalDownload" type="button" class="btn btn-primary" hidden="true">Download report
+                    </button>
+                    <!--  <div id="myModalContent">Please waiting the result</div> -->
+                    <div id="myModalProgress" class="progress" hidden="true">
+	                    <div id="myModalProgressBar" class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+	                    </div>
+                    </div>
+                    <div id="myModalContent">
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+	<script src="./js/tree.js"></script>
+</body>
+</html>

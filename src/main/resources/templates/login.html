@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<!-- thymeleaf 导入 -->
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="./js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<link rel="stylesheet" href="./css/bootstrap.css" th:src="@{/css/bootstrap.css}" type="text/css"></link>
+<script type="text/javascript">
+	$(function() {
+	})
+</script>
+<body>
+	<div class="container" th:replace="common :: header('login') "></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Jira Account</h3>
+					</div>
+					<div class="panel-body">
+						<form id="frmLogin" method="post" th:action="@{'/login'}" >
+							<div class="form-group form-inline">
+								<label for="txtUserName" class="col-md-4 control-label"
+									style="text-align: right;">User Name</label>
+								<div class="col-md-8">
+								<input class="form-control" style="width:80%;" autofocus="autofocus" name="txtUserCd" type="text"  value=""
+                                	th:id="usrCode" required="required"/>
+								</div>
+							</div>
+							<div class="form-group form-inline" style="padding-top:45px">
+								<label for="txtUserPwd" class="col-sm-4 control-label"
+									style="text-align: right;">Password</label>
+								<div class="col-md-8">
+										<input class="form-control" style="width:80%;" name="txtUserPwd" type="password" value="" required="required" />
+								</div>
+							</div>
+							<div class="form-group" style="padding-top:30px">
+								<div class="col-md-offset-3 col-md-5">
+									<button class="btn btn-primary btn-block" type="submit" name="action"
+										value="login">Login</button>
+								</div>
+							
+							</div>
+							<div class="form-group">
+								<div class=" col-md-12" style="padding-top:15px">
+									<div class="alert alert-danger" role="alert" th:if="${loginError}">
+										<strong>User name or password was not valid</strong>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+                                <div class=" col-md-12" style="padding-top:15px">
+                                    <div class="alert alert-danger" role="alert" th:if="${session_expired}">
+                                        <strong>Please re-login</strong>
+                                    </div>
+                                </div>
+                            </div>
+						</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" th:replace="common :: footer"></div>
+</body>
+</head>
+</html>
